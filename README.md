@@ -1,3 +1,5 @@
+NB: This exists because Harness pinned the helm provider to 2.9 which was over a year old, and many major versions behind latest. I was unable to create a branch/PR on the GitHub repo for their module as it was locked down.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

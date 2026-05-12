@@ -78,14 +78,14 @@ variable "proxy_user" {
   description = "The proxy user to use for the Harness delegate."
   type        = string
   // sensitive = true
-  default     = ""
+  default = ""
 }
 
 variable "proxy_password" {
   description = "The proxy password to use for the Harness delegate."
   type        = string
   // sensitive = true
-  default     = ""
+  default = ""
 }
 
 variable "proxy_host" {
@@ -120,6 +120,28 @@ variable "init_script" {
 
 variable "values" {
   description = "Additional values to pass to the helm chart. Values will be merged, in order, as Helm does with multiple -f options"
+  type        = string
+  default     = ""
+}
+
+variable "service_account" {
+  description = "Service account configuration for the delegate pod"
+  type = object({
+    create      = optional(bool, true)
+    name        = optional(string, "")
+    annotations = optional(map(string), {})
+  })
+  default = {}
+}
+
+variable "image_pull_secret" {
+  description = "Name of the Kubernetes secret to use for pulling the delegate image"
+  type        = string
+  default     = ""
+}
+
+variable "upgrader_image_pull_secret" {
+  description = "Name of the Kubernetes secret to use for pulling the upgrader image"
   type        = string
   default     = ""
 }

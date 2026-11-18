@@ -72,3 +72,31 @@ run "timeout" {
     error_message = "timeout not used"
   }
 }
+
+run "upgrader_mirror" {
+  command = plan
+
+  variables {
+    upgrader_image           = "docker.io/harness/upgrader:latest"
+    upgrader_registry_mirror = "public.ecr.aws/harness"
+  }
+
+  assert {
+    condition     = yamldecode(output.values).upgrader.upgraderDockerImage == "docker.io/harness/upgrader:latest"
+    error_message = "upgrader_image not used"
+  }
+
+  assert {
+    condition     = yamldecode(output.values).upgrader.registryMirror == "public.ecr.aws/harness"
+    error_message = "upgrader_registry_mirror not used"
+  }
+}
+
+run "upgrader_defaults" {
+  command = plan
+
+  assert {
+    condition     = !contains(keys(yamldecode(output.values).upgrader), "upgraderDockerImage") && !contains(keys(yamldecode(output.values).upgrader), "registryMirror")
+    error_message = "chart defaults overridden"
+  }
+}

@@ -151,3 +151,15 @@ variable "timeout" {
   type        = number
   default     = 300
 }
+
+variable "upgrader_image" {
+  description = "Upgrader image. Empty uses the chart default"
+  type        = string
+  default     = ""
+}
+
+variable "upgrader_registry_mirror" {
+  description = "Registry the upgrader pulls new delegate images from, e.g. public.ecr.aws/harness. Empty uses the chart default"
+  type        = string
+  default     = ""
+}

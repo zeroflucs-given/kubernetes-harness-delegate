@@ -54,6 +54,8 @@ No modules.
 | <a name="input_timeout"></a> [timeout](#input\_timeout) | Time in seconds to wait for the Helm release | `number` | `300` | no |
 | <a name="input_upgrader_enabled"></a> [upgrader\_enabled](#input\_upgrader\_enabled) | Is upgrader enabled. If true, delegate\_image is only used on first install | `bool` | `true` | no |
 | <a name="input_mtls_secret_name"></a> [mtls\_secret\_name](#input\_mtls\_secret\_name) | The name of the mTLS secret. | `string` | `""` | no |
+| <a name="input_upgrader_image"></a> [upgrader\_image](#input\_upgrader\_image) | Upgrader image. Empty uses the chart default | `string` | `""` | no |
+| <a name="input_upgrader_registry_mirror"></a> [upgrader\_registry\_mirror](#input\_upgrader\_registry\_mirror) | Registry the upgrader pulls new delegate images from, e.g. public.ecr.aws/harness. Empty uses the chart default | `string` | `""` | no |
 | <a name="input_values"></a> [values](#input\_values) | Additional values to pass to the helm chart. Values will be merged, in order, as Helm does with multiple -f options | `string` | `""` | no |
 
 ## Outputs

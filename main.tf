@@ -65,10 +65,14 @@ locals {
     imagePullSecret = var.image_pull_secret
 
     # Image pull secret for the upgrader image (separate field per values.yaml)
-    upgrader = {
-      enabled         = var.upgrader_enabled
-      imagePullSecret = var.upgrader_image_pull_secret
-    }
+    upgrader = merge(
+      {
+        enabled         = var.upgrader_enabled
+        imagePullSecret = var.upgrader_image_pull_secret
+      },
+      var.upgrader_image != "" ? { upgraderDockerImage = var.upgrader_image } : {},
+      var.upgrader_registry_mirror != "" ? { registryMirror = var.upgrader_registry_mirror } : {},
+    )
   })
 }
 

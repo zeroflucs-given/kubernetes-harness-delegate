@@ -6,6 +6,7 @@ NB: This exists because Harness pinned the helm provider to 2.9 which was over a
 | Name | Version |
 |------|---------|
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 3.0.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.24.0 |
 | <a name="requirement_utils"></a> [utils](#requirement\_utils) | >= 0.14.0 |
 
 ## Providers
@@ -13,6 +14,7 @@ NB: This exists because Harness pinned the helm provider to 2.9 which was over a
 | Name | Version |
 |------|---------|
 | <a name="provider_helm"></a> [helm](#provider\_helm) | >= 3.0.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.24.0 |
 | <a name="provider_utils"></a> [utils](#provider\_utils) | >= 0.14.0 |
 
 ## Modules
@@ -24,6 +26,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [helm_release.delegate](https://registry.terraform.io/providers/hashicorp/helm/2.9.0/docs/resources/release) | resource |
+| [kubernetes_resources.delegate](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/resources) | data source |
 | [utils_deep_merge_yaml.values](https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml) | data source |
 
 ## Inputs
@@ -48,7 +51,7 @@ No modules.
 | <a name="input_proxy_scheme"></a> [proxy\_scheme](#input\_proxy\_scheme) | The proxy user to use for the Harness delegate. | `string` | `""` | no |
 | <a name="input_proxy_user"></a> [proxy\_user](#input\_proxy\_user) | The proxy user to use for the Harness delegate. | `string` | `""` | no |
 | <a name="input_replicas"></a> [replicas](#input\_replicas) | replica count of delegates. | `number` | `1` | no |
-| <a name="input_upgrader_enabled"></a> [upgrader\_enabled](#input\_upgrader\_enabled) | Is upgrader enabled | `bool` | `true` | no |
+| <a name="input_upgrader_enabled"></a> [upgrader\_enabled](#input\_upgrader\_enabled) | Is upgrader enabled. If true, delegate\_image is only used on first install | `bool` | `true` | no |
 | <a name="input_mtls_secret_name"></a> [mtls\_secret\_name](#input\_mtls\_secret\_name) | The name of the mTLS secret. | `string` | `""` | no |
 | <a name="input_values"></a> [values](#input\_values) | Additional values to pass to the helm chart. Values will be merged, in order, as Helm does with multiple -f options | `string` | `""` | no |
 

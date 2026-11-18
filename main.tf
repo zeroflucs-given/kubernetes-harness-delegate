@@ -17,13 +17,29 @@ resource "helm_release" "delegate" {
   ]
 }
 
+# Reuse the running image so applies don't undo the upgrader
+data "kubernetes_resources" "delegate" {
+  count = var.upgrader_enabled ? 1 : 0
+
+  api_version    = "apps/v1"
+  kind           = "Deployment"
+  namespace      = var.namespace
+  field_selector = "metadata.name=${local.deployment_name}"
+}
+
 locals {
+  deployment_name = try(yamldecode(var.values).delegateName, var.delegate_name)
+  running_image = try(one([
+    for c in data.kubernetes_resources.delegate[0].objects[0].spec.template.spec.containers : c.image if c.name == "delegate"
+  ]), null)
+  delegate_image = coalesce(local.running_image, var.delegate_image)
+
   values = yamlencode({
     accountId           = var.account_id
     managerEndpoint     = var.manager_endpoint
     namespace           = var.namespace
     delegateName        = var.delegate_name
-    delegateDockerImage = var.delegate_image
+    delegateDockerImage = local.delegate_image
     replicas            = var.replicas
     upgrader            = { enabled = var.upgrader_enabled }
     nextGen             = var.next_gen

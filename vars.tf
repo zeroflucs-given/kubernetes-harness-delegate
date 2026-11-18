@@ -63,7 +63,7 @@ variable "replicas" {
 }
 
 variable "upgrader_enabled" {
-  description = "Is upgrader enabled"
+  description = "Is upgrader enabled. If true, delegate_image is only used on first install"
   type        = bool
   default     = true
 }

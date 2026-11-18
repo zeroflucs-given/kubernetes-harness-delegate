@@ -145,3 +145,9 @@ variable "upgrader_image_pull_secret" {
   type        = string
   default     = ""
 }
+
+variable "timeout" {
+  description = "Time in seconds to wait for the Helm release"
+  type        = number
+  default     = 300
+}

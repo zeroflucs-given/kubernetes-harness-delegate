@@ -59,3 +59,16 @@ run "upgrader_disabled" {
     error_message = "delegate_image not used"
   }
 }
+
+run "timeout" {
+  command = plan
+
+  variables {
+    timeout = 900
+  }
+
+  assert {
+    condition     = helm_release.delegate.timeout == 900
+    error_message = "timeout not used"
+  }
+}
